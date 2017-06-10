@@ -1,0 +1,27 @@
+{
+  "name": "pets.local",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hehachris/pets.local.git"
+  },
+  "author": "Chris Lam",
+  "bugs": {
+    "url": "https://github.com/hehachris/pets.local/issues"
+  },
+  "homepage": "https://github.com/hehachris/pets.local#readme",
+  "scripts": {
+    "test": "npm test",
+    "start": "node app.js"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
