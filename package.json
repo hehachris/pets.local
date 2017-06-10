@@ -16,6 +16,11 @@
     "test": "npm test",
     "start": "node app.js"
   },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0"
+  },
   "dependencies": {
     "express": "^4.15.3"
   }
