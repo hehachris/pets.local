@@ -14,7 +14,9 @@
   "homepage": "https://github.com/hehachris/pets.local#readme",
   "scripts": {
     "test": "npm test",
-    "start": "node app.js"
+    "start": "node app.js",
+    "db:init": "sequelize db:migrate  --config config/db.json --migrations-path db/migrations",
+    "db:load": "sequelize db:seed:all --config config/db.json --seeders-path db/seeders"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
@@ -22,6 +24,9 @@
     "eslint-plugin-import": "^2.3.0"
   },
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "sequelize": "^4.0.0",
+    "sequelize-cli": "^2.7.0",
+    "sqlite3": "^3.1.8"
   }
 }
