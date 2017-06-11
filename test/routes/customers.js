@@ -119,4 +119,37 @@ describe('Customers', () => {
                 });
         });
     });
+
+
+    describe('POST /customers/{customer_id}/adopt', () => {
+        it('should return 404 if missing pet_id', (done) => {
+            chai.request(app)
+                .post('/customers/1/adopt')
+                .end((err, res) => {
+                    assert.equal(res.status, 404);
+
+                    done();
+                });
+        });
+
+        it('should return 404 if customer ID not exist', (done) => {
+            chai.request(app)
+                .post('/customers/9999/adopt?pet_id=1')
+                .end((err, res) => {
+                    assert.equal(res.status, 404);
+
+                    done();
+                });
+        });
+
+        it('should return 404 if pet ID not exist', (done) => {
+            chai.request(app)
+                .post('/customers/1/adopt?pet_id=9999')
+                .end((err, res) => {
+                    assert.equal(res.status, 404);
+
+                    done();
+                });
+        });
+    });
 });
