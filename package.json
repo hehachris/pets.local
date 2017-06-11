@@ -14,7 +14,7 @@
   "homepage": "https://github.com/hehachris/pets.local#readme",
   "scripts": {
     "lint": "eslint app app.js config test",
-    "test": "npm run lint",
+    "test": "npm run lint && mocha",
     "start": "node app.js",
 
     "db:init": "sequelize db:migrate  --config config/db.json --migrations-path db/migrations",
