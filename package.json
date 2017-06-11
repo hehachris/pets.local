@@ -13,8 +13,10 @@
   },
   "homepage": "https://github.com/hehachris/pets.local#readme",
   "scripts": {
-    "test": "npm test",
+    "lint": "eslint app app.js config test",
+    "test": "npm run lint",
     "start": "node app.js",
+
     "db:init": "sequelize db:migrate  --config config/db.json --migrations-path db/migrations",
     "db:load": "sequelize db:seed:all --config config/db.json --seeders-path db/seeders"
   },
