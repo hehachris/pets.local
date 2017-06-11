@@ -8,7 +8,7 @@ module.exports = {
                 customer_id: 1,
                 age: 2,
                 species: 'Dog',
-                breed: 'Poodle'
+                breed: 'Pomeranian'
             },
             {
                 id: 2,

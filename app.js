@@ -1,17 +1,22 @@
-'use strict';
-
 const express = require('express');
+const bodyParser = require('body-parser');
+const compression = require('compression');
 
-// Constants
-const PORT = 8080;
-
-// App
 const app = express();
-app.get('/', function (req, res) {
-    res.send('Hello world\n');
-});
 
-app.listen(PORT);
-console.log('Running on http://localhost:' + PORT);
+// setup application
+app.use(compression());
+app.use(bodyParser.json());
+app.use(express.static(`${__dirname}/public`));
+
+app.disable('x-powered-by');
+
+require('./config/routes')(app);
+require('./app/libs/errorHandler')(app);
+
+// start application
+app.listen(8080, () => {
+    console.log('Listening on port 8080!');
+});
 
 module.exports = app;

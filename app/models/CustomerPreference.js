@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../libs/sequelize');
 
+const config = require('../../config');
+
 const CustomerPreference = sequelize.define('customer_preference', {
     id: {
         type: Sequelize.INTEGER,
@@ -19,6 +21,6 @@ const CustomerPreference = sequelize.define('customer_preference', {
         type: Sequelize.ENUM('labrador', 'poodle', 'spaniel', 'terrier'),
         allowNull: true
     }
-});
+}, config.modelOptions);
 
 module.exports = CustomerPreference;

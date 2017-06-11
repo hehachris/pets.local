@@ -42,6 +42,14 @@ module.exports = {
                 age: 5,
                 species: 'Dog',
                 breed: 'Terrier'
+            },
+            {
+                id: 6,
+                name: 'Snowball',
+                available_from: '2016-12-15',
+                age: 1,
+                species: 'Rabbit',
+                breed: null
             }
         ], {});
     },

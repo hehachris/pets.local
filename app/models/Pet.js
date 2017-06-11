@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../libs/sequelize');
 
+const config = require('../../config');
+
 const Pet = sequelize.define('pet', {
     id: {
         type: Sequelize.INTEGER,
@@ -27,7 +29,12 @@ const Pet = sequelize.define('pet', {
     breed: { // For dogs only
         type: Sequelize.ENUM('Labrador', 'Poodle', 'Spaniel', 'Terrier', 'Pomeranian'),
         allowNull: true
+    },
+    is_adopted: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
-});
+}, config.modelOptions);
 
 module.exports = Pet;

@@ -11,18 +11,20 @@ module.exports = {
             customer_id: {
                 type: Sequelize.INTEGER,
                 references: {
-                    model: 'customer',
+                    model: 'customers',
                     key: 'id'
                 },
+                unique: 'customer_id__pet_id',
                 onUpdate: 'cascade',
                 onDelete: 'cascade'
             },
             pet_id: {
                 type: Sequelize.INTEGER,
                 references: {
-                    model: 'pet',
+                    model: 'pets',
                     key: 'id'
                 },
+                unique: 'customer_id__pet_id',
                 onUpdate: 'cascade',
                 onDelete: 'cascade'
             },
