@@ -12,6 +12,7 @@ app.use(express.static(`${__dirname}/public`));
 app.disable('x-powered-by');
 
 require('./config/routes')(app);
+require('./app/libs/errorHandler')(app);
 
 // start application
 app.listen(8080, () => {
