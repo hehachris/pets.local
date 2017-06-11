@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 
 const app = express();
 
 // setup application
+app.use(compression());
 app.use(bodyParser.json());
 
 require('./config/routes')(app);
