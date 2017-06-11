@@ -8,6 +8,8 @@ const app = express();
 app.use(compression());
 app.use(bodyParser.json());
 
+app.disable('x-powered-by');
+
 require('./config/routes')(app);
 
 // start application
