@@ -21,9 +21,12 @@
     "db:load": "sequelize db:seed:all --config config/db.json --seeders-path db/seeders"
   },
   "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-http": "^3.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
-    "eslint-plugin-import": "^2.3.0"
+    "eslint-plugin-import": "^2.3.0",
+    "mocha": "^3.4.2"
   },
   "dependencies": {
     "express": "^4.15.3",
