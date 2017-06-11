@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const customerRepo = require('../repos/sequelize/customer');
 const models = require('../models');
 
@@ -38,6 +40,8 @@ module.exports = {
             });
     },
     post(req, res, next) {
+        let thePet;
+
         models.Pet.create({
             name: req.body.name,
             available_from: req.body.available_from,
@@ -46,7 +50,16 @@ module.exports = {
             breed: req.body.breed || null,
         })
             .then((pet) => {
+                thePet = pet;
                 res.status(201).send(pet);
+                return customerRepo.findMatchedCustomersByPet(pet);
+            })
+            .then((matchedCustomers) => {
+                _.map(matchedCustomers, 'id').forEach((customerId) => {
+                    req.sockets[customerId].emit('pet.matched', {
+                        pet: thePet
+                    });
+                });
             })
             .catch((err) => {
                 next(err);
