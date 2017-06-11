@@ -60,8 +60,8 @@ module.exports = {
             }
 
             return models.CustomerAdoption.create({
-                customer,
-                pet
+                customer_id: customer.id,
+                pet_id: pet.id
             });
         }).then((adoption) => {
             res.status(201).send(adoption);
