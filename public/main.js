@@ -7,6 +7,10 @@
         socket.emit('user.watch.start', {
             customer_id: parseInt(queries.customer_id)
         });
+
+        socket.on('hello', function(data) {
+            console.log(data);
+        });
     }
 })(jQuery);
 
