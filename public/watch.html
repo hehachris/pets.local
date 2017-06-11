@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <title>Real-time Pets Watcher</title>
+</head>
+<body>
+<h1>Real-time Pets Watch</h1>
+<h2>Who are you?</h2>
+<ul>
+    <li><a href="?customer_id=1">Alice</a></li>
+    <li><a href="?customer_id=2">Bob</a></li>
+    <li><a href="?customer_id=3">Charlie</a></li>
+</ul>
+<h2>Pet Alert</h2>
+<ul id="petsList">
+    <li class="nothing">Nothing yet...</li>
+</ul>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

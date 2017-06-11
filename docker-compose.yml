@@ -6,4 +6,5 @@ services:
       - '8080:8080'
     volumes:
       - ./db:/usr/src/app/db
+      - ./public:/usr/src/app/public
       - ./test:/usr/src/app/test
