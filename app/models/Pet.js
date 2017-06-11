@@ -29,6 +29,11 @@ const Pet = sequelize.define('pet', {
     breed: { // For dogs only
         type: Sequelize.ENUM('Labrador', 'Poodle', 'Spaniel', 'Terrier', 'Pomeranian'),
         allowNull: true
+    },
+    is_adopted: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 }, config.modelOptions);
 
