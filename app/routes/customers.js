@@ -1,16 +1,18 @@
 const models = require('../models');
+const customerRepo = require('../repos/sequelize/customer');
+const customerPreferenceRepo = require('../repos/sequelize/customerPreference');
 const petRepo = require('../repos/sequelize/pet');
 
 module.exports = {
     getAll(req, res) {
-        models.Customer.findAll({
+        customerRepo.findAll({
             include: models.CustomerPreference
         }).then((customers) => {
             res.send(customers);
         });
     },
     getOne(req, res, next) {
-        models.Customer.findById(req.params.customer_id, {
+        customerRepo.findById(req.params.customer_id, {
             include: models.CustomerPreference
         })
             .then((customer) => {
@@ -25,13 +27,14 @@ module.exports = {
             });
     },
     getMatchedPets(req, res, next) {
-        models.CustomerPreference.findById(req.params.customer_id).then((customerPreference) => {
-            if (!customerPreference) {
-                throw new Error(404);
-            }
+        customerPreferenceRepo.findById(req.params.customer_id)
+            .then((customerPreference) => {
+                if (!customerPreference) {
+                    throw new Error(404);
+                }
 
-            return petRepo.findMatchedPetsByCustomerPreference(customerPreference);
-        })
+                return petRepo.findMatchedPetsByCustomerPreference(customerPreference);
+            })
             .then((pets) => {
                 res.send(pets);
             })
@@ -59,8 +62,8 @@ module.exports = {
         let thePet;
 
         models.sequelize.Promise.all([
-            models.Pet.findById(req.query.pet_id),
-            models.Customer.findById(req.params.customer_id)
+            petRepo.findById(req.query.pet_id),
+            customerRepo.findById(req.params.customer_id)
         ])
             .spread((pet, customer) => {
                 if (!pet || !customer) {

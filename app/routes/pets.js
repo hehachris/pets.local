@@ -1,18 +1,19 @@
 const _ = require('lodash');
 
 const customerRepo = require('../repos/sequelize/customer');
+const petRepo = require('../repos/sequelize/pet');
 const models = require('../models');
 const socketStore = require('../libs/socketStore/native');
 
 module.exports = {
     getAll(req, res) {
-        models.Pet.findAll()
+        petRepo.findAll()
             .then((pets) => {
                 res.send(pets);
             });
     },
     getOne(req, res, next) {
-        models.Pet.findById(req.params.pet_id)
+        petRepo.findById(req.params.pet_id)
             .then((pet) => {
                 if (!pet) {
                     throw new Error(404);
@@ -25,7 +26,7 @@ module.exports = {
             });
     },
     getMatchedCustomers(req, res, next) {
-        models.Pet.findById(req.params.pet_id)
+        petRepo.findById(req.params.pet_id)
             .then((pet) => {
                 if (!pet) {
                     throw new Error(404);

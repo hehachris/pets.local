@@ -1,6 +1,12 @@
 const models = require('../../models');
 
 module.exports = {
+    findAll(options) {
+        return models.Customer.findAll(options);
+    },
+    findById(id, options) {
+        return models.Customer.findById(id, options);
+    },
     findMatchedCustomersByPet(pet) {
         return models.Customer.findAll({
             include: [{
