@@ -9,7 +9,10 @@ module.exports = {
     },
     findMatchedPetsByCustomerPreference(customerPreference) {
         const criteria = {
-            is_adopted: false
+            is_adopted: false,
+            available_from: {
+                $lte: new Date()
+            }
         };
 
         if (customerPreference.age !== null) {
