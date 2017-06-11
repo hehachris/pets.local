@@ -1,4 +1,4 @@
-const customers = require('../app/routes/customer');
+const customers = require('../app/routes/customers');
 const pets = require('../app/routes/pets');
 
 module.exports = (app) => {
