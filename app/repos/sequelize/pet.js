@@ -2,7 +2,9 @@ const models = require('../../models');
 
 module.exports = {
     findMatchedPetsByCustomerPreference(customerPreference) {
-        const criteria = {};
+        const criteria = {
+            is_adopted: false
+        };
 
         if (customerPreference.age !== null) {
             criteria.age = {
