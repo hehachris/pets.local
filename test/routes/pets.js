@@ -41,4 +41,43 @@ describe('Pets', () => {
                 });
         });
     });
+
+    describe('POST /pets', () => {
+        it('should return 400 if missing required fields', (done) => {
+            chai.request(app)
+                .post('/pets')
+                .send({
+                    name: 'Nerd Stark'
+                })
+                .end((err, res) => {
+                    assert.equal(res.status, 400);
+
+                    done();
+                });
+        });
+
+        it('should return 201 if pet successfully added', (done) => {
+            const nard = {
+                name: 'Nerd Stark',
+                available_from: new Date('2017-12-25'),
+                age: 15,
+                species: 'Dog',
+                breed: 'Poodle'
+            };
+
+            chai.request(app)
+                .post('/pets')
+                .send(nard)
+                .end((err, res) => {
+                    assert.equal(res.status, 201);
+                    assert.propertyVal(res.body, 'name', nard.name);
+                    assert.propertyVal(res.body, 'available_from', nard.available_from.toISOString());
+                    assert.propertyVal(res.body, 'age', nard.age);
+                    assert.propertyVal(res.body, 'species', nard.species);
+                    assert.propertyVal(res.body, 'breed', nard.breed);
+
+                    done();
+                });
+        });
+    });
 });
