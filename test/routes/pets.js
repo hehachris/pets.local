@@ -62,7 +62,9 @@ describe('Pets', () => {
 
                     done();
                 });
+        });
 
+        it('should match some customers', (done) => {
             chai.request(app)
                 .get('/pets/2/matches')
                 .end((err, res) => {
