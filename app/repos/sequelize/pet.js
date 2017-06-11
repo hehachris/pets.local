@@ -1,9 +1,18 @@
 const models = require('../../models');
 
 module.exports = {
+    findAll(options) {
+        return models.Pet.findAll(options);
+    },
+    findById(id, options) {
+        return models.Pet.findById(id, options);
+    },
     findMatchedPetsByCustomerPreference(customerPreference) {
         const criteria = {
-            is_adopted: false
+            is_adopted: false,
+            available_from: {
+                $lte: new Date()
+            }
         };
 
         if (customerPreference.age !== null) {
