@@ -3,11 +3,11 @@ const _ = require('lodash');
 const sockets = {};
 
 module.exports = {
-    getStore() {
-        return sockets;
-    },
     getSize() {
         return Object.keys(sockets).length;
+    },
+    getByKey(key) {
+        return sockets[key];
     },
     addSocket(socket, customKey) {
         const key = typeof customKey !== 'undefined' ? customKey : socket.id;

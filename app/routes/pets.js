@@ -2,6 +2,7 @@ const _ = require('lodash');
 
 const customerRepo = require('../repos/sequelize/customer');
 const models = require('../models');
+const socketStore = require('../libs/socketStore/native');
 
 module.exports = {
     getAll(req, res) {
@@ -56,7 +57,9 @@ module.exports = {
             })
             .then((matchedCustomers) => {
                 _.map(matchedCustomers, 'id').forEach((customerId) => {
-                    req.sockets[customerId].emit('pet.matched', {
+                    const socket = socketStore.getByKey(customerId);
+
+                    socket.emit('pet.matched', {
                         pet: thePet
                     });
                 });
