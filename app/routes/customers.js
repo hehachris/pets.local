@@ -9,29 +9,33 @@ module.exports = {
             res.send(customers);
         });
     },
-    getOne(req, res) {
+    getOne(req, res, next) {
         models.Customer.findById(req.params.customer_id, {
             include: models.CustomerPreference
         }).then((customer) => {
             if (!customer) {
-                res.sendStatus(404);
-            } else {
-                res.send(customer);
+                throw new Error(404);
             }
+
+            res.send(customer);
+        }).catch((err) => {
+            next(err);
         });
     },
-    getMatchedPets(req, res) {
+    getMatchedPets(req, res, next) {
         models.CustomerPreference.findById(req.params.customer_id).then((customerPreference) => {
             if (!customerPreference) {
-                res.sendStatus(404);
-            } else {
-                petRepo.findMatchedPetsByCustomerPreference(customerPreference).then((pets) => {
-                    res.send(pets);
-                });
+                throw new Error(404);
             }
+
+            return petRepo.findMatchedPetsByCustomerPreference(customerPreference);
+        }).then((pets) => {
+            res.send(pets);
+        }).catch((err) => {
+            next(err);
         });
     },
-    post(req, res) {
+    post(req, res, next) {
         models.Customer.create(
             {
                 name: req.body.name,
@@ -43,7 +47,7 @@ module.exports = {
         ).then((customer) => {
             res.status(201).send(customer);
         }).catch((err) => {
-            res.status(400).send(err);
+            next(err);
         });
     },
     adopt(req, res, next) {

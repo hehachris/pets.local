@@ -86,14 +86,14 @@ describe('Customers', () => {
     });
 
     describe('POST /customers', () => {
-        it('should return 400 if missing required fields', (done) => {
+        it('should return 500 if missing required fields', (done) => {
             chai.request(app)
                 .post('/customers')
                 .send({
                     invalid_field: 123
                 })
                 .end((err, res) => {
-                    assert.equal(res.status, 400);
+                    assert.equal(res.status, 500);
 
                     done();
                 });

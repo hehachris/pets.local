@@ -7,27 +7,31 @@ module.exports = {
             res.send(pets);
         });
     },
-    getOne(req, res) {
+    getOne(req, res, next) {
         models.Pet.findById(req.params.pet_id).then((pet) => {
             if (!pet) {
-                res.sendStatus(404);
-            } else {
-                res.send(pet);
+                throw new Error(404);
             }
+
+            res.send(pet);
+        }).catch((err) => {
+            next(err);
         });
     },
-    getMatchedCustomers(req, res) {
+    getMatchedCustomers(req, res, next) {
         models.Pet.findById(req.params.pet_id).then((pet) => {
             if (!pet) {
-                res.sendStatus(404);
-            } else {
-                customerRepo.findMatchedCustomersByPet(pet).then((customers) => {
-                    res.send(customers);
-                });
+                throw new Error(404);
             }
+
+            return customerRepo.findMatchedCustomersByPet(pet);
+        }).then((customers) => {
+            res.send(customers);
+        }).catch((err) => {
+            next(err);
         });
     },
-    post(req, res) {
+    post(req, res, next) {
         models.Pet.create({
             name: req.body.name,
             available_from: req.body.available_from,
@@ -37,7 +41,7 @@ module.exports = {
         }).then((pet) => {
             res.status(201).send(pet);
         }).catch((err) => {
-            res.status(400).send(err);
+            next(err);
         });
     }
 };
