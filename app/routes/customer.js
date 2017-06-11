@@ -2,12 +2,16 @@ const models = require('../models');
 
 module.exports = {
     getAll(req, res) {
-        models.Customer.findAll().then((customers) => {
+        models.Customer.findAll({
+            include: [models.CustomerPreference]
+        }).then((customers) => {
             res.send(customers);
         });
     },
     getOne(req, res) {
-        models.Customer.findById(req.params.customer_id).then((customer) => {
+        models.Customer.findById(req.params.customer_id, {
+            include: [models.CustomerPreference]
+        }).then((customer) => {
             if (!customer) {
                 res.sendStatus(404);
             } else {
