@@ -8,14 +8,23 @@ const app = require('../../app');
 
 describe('Pets', () => {
     describe('GET /pets', () => {
-        it('it should GET all the pets', (done) => {
+        it('should GET all the pets', (done) => {
             chai.request(app)
                 .get('/pets')
                 .end((err, res) => {
                     assert.equal(res.status, 200);
-                    assert.isArray(res.body, 'array');
+                    assert.isArray(res.body);
                     assert.isNotEmpty(res.body);
 
+                    done();
+                });
+        });
+
+        it('should return 404 if pet ID not exist', (done) => {
+            chai.request(app)
+                .get('/pets/999999')
+                .end((err, res) => {
+                    assert.equal(res.status, 404);
                     done();
                 });
         });
