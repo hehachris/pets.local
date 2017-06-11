@@ -28,5 +28,17 @@ describe('Pets', () => {
                     done();
                 });
         });
+
+        it('should GET one pet', (done) => {
+            chai.request(app)
+                .get('/pets/1')
+                .end((err, res) => {
+                    assert.equal(res.status, 200);
+                    assert.isObject(res.body);
+                    assert.equal(res.body.name, 'Miu Miu');
+
+                    done();
+                });
+        });
     });
 });
