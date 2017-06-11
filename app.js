@@ -7,6 +7,7 @@ const app = express();
 // setup application
 app.use(compression());
 app.use(bodyParser.json());
+app.use(express.static(`${__dirname}/public`));
 
 app.disable('x-powered-by');
 
