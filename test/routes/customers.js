@@ -16,6 +16,10 @@ describe('Customers', () => {
                     assert.isArray(res.body);
                     assert.isNotEmpty(res.body);
 
+                    assert.property(res.body[0], 'customer_preference');
+                    assert.isObject(res.body[0].customer_preference);
+                    assert.isNumber(res.body[0].customer_preference.id);
+
                     done();
                 });
         });
@@ -37,6 +41,10 @@ describe('Customers', () => {
                     assert.isObject(res.body);
                     assert.equal(res.body.name, 'Bob');
 
+                    assert.property(res.body, 'customer_preference');
+                    assert.isObject(res.body.customer_preference);
+                    assert.isNumber(res.body.customer_preference.id);
+
                     done();
                 });
         });
@@ -57,16 +65,20 @@ describe('Customers', () => {
         });
 
         it('should return 201 if customer successfully added', (done) => {
-            const nard = {
-                name: 'Arya Stark'
+            const arya = {
+                name: 'Arya Stark',
+                customer_preference: {
+                    age: 0,
+                    species: 'Dog'
+                }
             };
 
             chai.request(app)
                 .post('/customers')
-                .send(nard)
+                .send(arya)
                 .end((err, res) => {
                     assert.equal(res.status, 201);
-                    assert.propertyVal(res.body, 'name', nard.name);
+                    assert.propertyVal(res.body, 'name', arya.name);
 
                     done();
                 });
