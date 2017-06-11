@@ -50,6 +50,41 @@ describe('Customers', () => {
         });
     });
 
+    describe('GET /customers/{customer_id}/matches', () => {
+        it('should return 404 if customer ID not exist', (done) => {
+            chai.request(app)
+                .get('/customers/999999/matches')
+                .end((err, res) => {
+                    assert.equal(res.status, 404);
+                    done();
+                });
+        });
+
+        it('should match some customers', (done) => {
+            chai.request(app)
+                .get('/customers/1/matches')
+                .end((err, res) => {
+                    assert.equal(res.status, 200);
+                    assert.isArray(res.body);
+                    assert.isNotEmpty(res.body);
+
+                    done();
+                });
+        });
+
+        it('should match some customers', (done) => {
+            chai.request(app)
+                .get('/customers/2/matches')
+                .end((err, res) => {
+                    assert.equal(res.status, 200);
+                    assert.isArray(res.body);
+                    assert.isNotEmpty(res.body);
+
+                    done();
+                });
+        });
+    });
+
     describe('POST /customers', () => {
         it('should return 400 if missing required fields', (done) => {
             chai.request(app)
