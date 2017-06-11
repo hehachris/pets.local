@@ -45,5 +45,28 @@ module.exports = {
         }).catch((err) => {
             res.status(400).send(err);
         });
+    },
+    adopt(req, res, next) {
+        if (!req.query.pet_id) {
+            throw new Error(404);
+        }
+
+        models.sequelize.Promise.all([
+            models.Pet.findById(req.query.pet_id),
+            models.Customer.findById(req.params.customer_id)
+        ]).spread((pet, customer) => {
+            if (!pet || !customer) {
+                throw new Error(404);
+            }
+
+            return models.CustomerAdoption.create({
+                customer,
+                pet
+            });
+        }).then((adoption) => {
+            res.status(201).send(adoption);
+        }).catch((err) => {
+            next(err);
+        });
     }
 };
