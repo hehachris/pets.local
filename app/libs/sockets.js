@@ -1,8 +1,8 @@
-module.exports = (app, io) => {
-    const sockets = {};
+const socketStore = require('./socketStore/native');
 
+module.exports = (app, io) => {
     app.use((req, res, next) => {
-        req.sockets = sockets;
+        req.sockets = socketStore.getStore();
         next();
     });
 
@@ -10,11 +10,15 @@ module.exports = (app, io) => {
         socket.on('user.watch.start', (data) => {
             const customerId = parseInt(data.customer_id, 10);
 
-            sockets[customerId] = socket;
+            socketStore.addSocket(socket, customerId);
 
             socket.emit('hello', {
                 customer_id: customerId
             });
+        });
+
+        socket.on('disconnect', () => {
+            socketStore.deleteBySocketId(socket.id);
         });
     });
 };
