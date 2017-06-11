@@ -14,6 +14,7 @@ module.exports = {
                     model: 'customers',
                     key: 'id'
                 },
+                unique: 'customer_id__pet_id',
                 onUpdate: 'cascade',
                 onDelete: 'cascade'
             },
@@ -23,6 +24,7 @@ module.exports = {
                     model: 'pets',
                     key: 'id'
                 },
+                unique: 'customer_id__pet_id',
                 onUpdate: 'cascade',
                 onDelete: 'cascade'
             },
