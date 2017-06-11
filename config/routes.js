@@ -8,5 +8,6 @@ module.exports = (app) => {
 
     app.get('/pets', pets.getAll);
     app.get('/pets/:pet_id', pets.getOne);
+    app.get('/pets/:pet_id/matches', pets.getMatchedCustomers);
     app.post('/pets', pets.post);
 };

@@ -1,3 +1,4 @@
+const customerRepo = require('../repos/sequelize/customer');
 const models = require('../models');
 
 module.exports = {
@@ -12,6 +13,17 @@ module.exports = {
                 res.sendStatus(404);
             } else {
                 res.send(pet);
+            }
+        });
+    },
+    getMatchedCustomers(req, res) {
+        models.Pet.findById(req.params.pet_id).then((pet) => {
+            if (!pet) {
+                res.sendStatus(404);
+            } else {
+                customerRepo.findMatchedCustomersByPet(pet).then((customers) => {
+                    res.send(customers);
+                });
             }
         });
     },
