@@ -12,6 +12,8 @@ function onCurrentPosition(startingPosition) {
         zoom: 15
     });
 
+    showNearbyPets();
+
     map.addListener('dragend', showNearbyPets);
 }
 
