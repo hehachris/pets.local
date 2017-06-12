@@ -1,3 +1,5 @@
+const Geo = require('geo-nearby');
+
 const models = require('../../models');
 
 module.exports = {
@@ -36,5 +38,19 @@ module.exports = {
         return models.Pet.findAll({
             where: criteria
         });
+    },
+    findNearby(lat, lng, km = 2) {
+        return this.findAll()
+            .then((pets) => {
+                const geo = new Geo(pets, { setOptions: { id: 'id', lat: 'latitude', lon: 'longitude' } });
+
+                const nearByPetIds = geo.nearBy(lat, lng, km * 1000).map((v) => {
+                    return v.i;
+                });
+
+                return pets.filter((pet) => {
+                    return nearByPetIds.includes(pet.id);
+                });
+            });
     }
 };
