@@ -40,10 +40,19 @@ function showNearbyPets(km) {
             km: km || 2
         },
         success: function(data) {
+            deleteAllMarkers();
+
             data.forEach(function(pet) {
                 displayPetMarker(pet.latitude, pet.longitude);
             });
         },
         dataType: 'json'
     });
+}
+
+function deleteAllMarkers() {
+    petMarkers.forEach(function(marker) {
+        marker.setMap(null);
+    });
+    petMarkers = [];
 }
