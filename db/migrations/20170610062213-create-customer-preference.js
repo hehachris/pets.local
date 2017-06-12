@@ -22,11 +22,11 @@ module.exports = {
                 allowNull: true
             },
             species: {
-                type: Sequelize.ENUM('cat', 'dog', 'rabbit'),
+                type: Sequelize.STRING,
                 allowNull: true
             },
             breed: { // For dogs only
-                type: Sequelize.ENUM('labrador', 'poodle', 'spaniel', 'terrier'),
+                type: Sequelize.STRING,
                 allowNull: true
             }
         });
