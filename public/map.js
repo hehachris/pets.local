@@ -8,4 +8,9 @@ function onCurrentPosition(startingPosition) {
         },
         zoom: 15
     });
+
+    var startingMarker = new google.maps.Marker({
+        position: map.getCenter(),
+        map: map
+    });
 }
