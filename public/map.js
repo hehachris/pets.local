@@ -9,7 +9,8 @@ function onCurrentPosition(startingPosition) {
             lat: startingPosition.coords.latitude,
             lng: startingPosition.coords.longitude
         },
-        zoom: 15
+        zoom: 15,
+        scaleControl: true,
     });
 
     showNearbyPets();
@@ -37,7 +38,7 @@ function showNearbyPets(km) {
         data: {
             latitude: center.lat,
             longitude: center.lng,
-            km: km || 2
+            km: km || 3
         },
         success: function(data) {
             deleteAllMarkers();
