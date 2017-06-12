@@ -1,5 +1,6 @@
 const _ = require('lodash');
-const Geo = require('geo-nearby');
+
+const config = require('../../config');
 
 const customerRepo = require('../repos/sequelize/customer');
 const petRepo = require('../repos/sequelize/pet');
@@ -11,7 +12,7 @@ module.exports = {
         let queryPromise;
 
         if (req.query.latitude && req.query.longitude) {
-            const km = req.query.km || 2;
+            const km = req.query.km || config.defaultDistance;
             queryPromise = petRepo.findNearby(req.query.latitude, req.query.longitude, km);
         } else {
             queryPromise = petRepo.findAll();
