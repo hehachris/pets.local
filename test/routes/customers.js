@@ -151,5 +151,17 @@ describe('Customers', () => {
                     done();
                 });
         });
+
+        it('should adopt a pet successfully', (done) => {
+            chai.request(app)
+                .post('/customers/1/adopt?pet_id=1')
+                .end((err, res) => {
+                    assert.equal(res.status, 201);
+                    assert.equal(res.body.id, 1);
+                    assert.equal(res.body.is_adopted, true);
+
+                    done();
+                });
+        });
     });
 });
