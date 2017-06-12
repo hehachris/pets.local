@@ -82,13 +82,9 @@ module.exports = {
                 }
             });
 
-            const nearByPetIds = geo.nearBy(lat, lng, km * 1000).map((v) => {
-                return v.i;
-            });
+            const nearByPetIds = geo.nearBy(lat, lng, km * 1000).map(v => v.i);
 
-            return pets.filter((pet) => {
-                return nearByPetIds.includes(pet.id);
-            });
+            return pets.filter(pet => nearByPetIds.includes(pet.id));
         });
     }
 };
