@@ -77,11 +77,7 @@ module.exports = {
                     pet_id: pet.id
                 });
             })
-            .then(() => {
-                thePet.update({
-                    is_adopted: true
-                });
-            })
+            .then(() => thePet.update({ is_adopted: true }))
             .then(() => {
                 res.status(201).send(thePet);
             })
