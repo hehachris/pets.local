@@ -31,6 +31,7 @@
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "express": "^4.15.3",
+    "geo-nearby": "^2.0.1",
     "lodash": "^4.17.4",
     "sequelize": "^4.0.0",
     "sequelize-cli": "^2.7.0",

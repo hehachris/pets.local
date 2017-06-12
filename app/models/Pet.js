@@ -34,6 +34,14 @@ const Pet = sequelize.define('pet', {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false
+    },
+    latitude: {
+        type: Sequelize.DECIMAL(10, 8),
+        allowNull: true
+    },
+    longitude: {
+        type: Sequelize.DECIMAL(11, 8),
+        allowNull: true
     }
 }, config.modelOptions);
 
