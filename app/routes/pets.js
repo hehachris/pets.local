@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const Geo = require('geo-nearby');
 
 const customerRepo = require('../repos/sequelize/customer');
 const petRepo = require('../repos/sequelize/pet');
@@ -7,10 +8,18 @@ const socketStore = require('../libs/socketStore/native');
 
 module.exports = {
     getAll(req, res) {
-        petRepo.findAll()
-            .then((pets) => {
-                res.send(pets);
-            });
+        let queryPromise;
+
+        if (req.query.latitude && req.query.longitude) {
+            const km = req.query.km || 2;
+            queryPromise = petRepo.findNearby(req.query.latitude, req.query.longitude, km);
+        } else {
+            queryPromise = petRepo.findAll();
+        }
+
+        queryPromise.then((pets) => {
+            res.send(pets);
+        });
     },
     getOne(req, res, next) {
         petRepo.findById(req.params.pet_id)
